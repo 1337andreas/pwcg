@@ -1,5 +1,5 @@
 # pwcg
-PWCG 2000 - Password Checker/Generator is a Python program that checks your password against a database of known leaks and generates a new safe password which isn't in any known leaks. 
+PWCG 2000 - The Password Checker/Generator is a Python program that checks your password against a database of known leaks and generates a new safe password which isn't in any known leaks. 
 The user is able to determine the new password's length, 8-16 characters. 
 
 Current features:
