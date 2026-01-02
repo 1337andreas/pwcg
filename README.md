@@ -7,9 +7,9 @@ Current features:
 -Random password generation
 -Password length choice
 -Key detection to prevent crashing
+-Existing password check using HIBP's API 
 
 Planned features:
--Adding the database itself :D
--The actual password cross-check
+-Checking the newly generated password against HIBP automatically
 -Selecting a language
--Ability to return to the menu without running the script again.
+
