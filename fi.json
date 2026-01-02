@@ -1,0 +1,26 @@
+{
+  "menu_title": "TERVETULOA: ",
+  "menu_choice": "VALITSE ",
+  "menu_checker": "- (T)arkista nykyinen salasana HIBP-tietokantaa vasten",
+  "menu_generator": "- (G)eneroi uusi salasana",
+  "menu_language": "- Kie(l)en valinta",
+  "menu_exit": "- (X) Poistu",
+
+  "enter_password_check": "\nSyötä salasana, jonka haluat tarkistaa.",
+  "password_found": "Salasana löytyi {count} tietovuodosta!",
+  "password_safe": "Salasanaa ei löytynyt yhdestäkään tunnetusta tietovuodosta.",
+
+  "enter_password_length": "Syötä haluamasi merkkimäärä (8–16) uudelle salasanalle.",
+  "password_length_prompt": "Salasanan pituus: ",
+  "password_too_short": "Salasana on liian lyhyt! Paina ENTER jatkaaksesi.",
+  "password_too_long": "Salasana on liian pitkä! Paina ENTER jatkaaksesi.",
+  "generating_password": "Generoidaan salasanaa...\n",
+  "password_suggestion": "Ehdotus turvalliseksi salasanaksi: ",
+
+  "language_menu": "VALITSE KIELI:\n(en) - English\n(sv) - Svenska\n(fi) - Suomi\n(de) - Deutsch",
+
+  "press_return": "Paina ENTER jatkaaksesi.",
+  "press_return_menu": "Paina ENTER palataksesi valikkoon.",
+  "invalid_choice": "Virheellinen valinta! Paina yhtä pyydetyistä näppäimistä.",
+  "invalid_input": "Virheellinen syöttö! Paina ENTER jatkaaksesi."
+}

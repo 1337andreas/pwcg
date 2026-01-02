@@ -1,0 +1,26 @@
+{
+  "menu_title": "WILLKOMMEN ZU",
+  "menu_choice": "BITTE WÄHLEN SIE:",
+  "menu_checker": "- (K)ontrolle der derzeitiges Passwort im HIBP-Database",
+  "menu_generator": "- (G)eneriere ein neues Passwort",
+  "menu_language": "- (S)prache wählen",
+  "menu_exit": "- (X) Beenden",
+
+  "enter_password_check": "\nBitte schreiben Sie einen Passwort, die Sie kontrollieren wollen.\n",
+  "password_found": "Passwort wurde in {count} Data-Lecks gefundet!",
+  "password_safe": "Passwort wurde in keine gekennte Lecks gefundet.",
+
+  "enter_password_length": "Bitte wählen Sie wie lang (8–16 Zeichen) Ihr neues Passwort sein soll.",
+  "password_length_prompt": "Passwort-Länge: ",
+  "password_too_short": "Passwort ist zu kurz! Drücken Sie EINGABE um fortzusetzen.",
+  "password_too_long": "Passwort ist zu lang! Drücken Sie EINGABE um fortzusetzen.",
+  "generating_password": "Passwort wird generiert...\n",
+  "password_suggestion": "Sicheres Passwort-Vorschlag: ",
+
+  "language_menu": "WÄHLEN SIE EIN SPRACHE:\n(en) - English\n(sv) - Svenska\n(fi) - Suomi\n(de) - Deutsch",
+
+  "press_return": "Drücken Sie EINGABE um fortzusetzen.",
+  "press_return_menu": "Drücken Sie EINGABE um wieder ins Menü zu kommen.",
+  "invalid_choice": "Ungültiges Wahl! Drücken Sie einer die angefragten Taste.",
+  "invalid_input": "Ungültiges Eingabe! Drücken Sie EINGABE um fortzusetzen."
+}
