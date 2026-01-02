@@ -2,7 +2,7 @@
 #This script can both generate a secure password and check an existing one against a list of millions of known leaked passwords.
 #Furthermore, the user may upon generating a new password choose the amount of symbols needed. 
 #The script will automatically throw in upper- and lowercase letters from A to Z, as well as numbers and special symbols. The generated password also gets cross-checked for leaks to verify its safety.
-#Version 1.0e - EXPERIMENTAL BRANCH with LOCALISATION
+#Version 1.0
 
 import json                                                                                                     #Required dependency for the localisation feature. More languages could easily be added.
 import getpass
@@ -131,6 +131,7 @@ while True:
             #Changelog 02-01-2026 (v1.0)
             #Issues with password length have been resolved. Now passwords generate as they should.
             #Finnish language file added. Thank you Vilho / saabismi for writing the translation!  
+
             #Welcome sign in the menu now translates correctly, it was still hard-coded before.     
     
 
