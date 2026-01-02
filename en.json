@@ -1,0 +1,26 @@
+{
+  "menu_title": "WELCOME TO",
+  "menu_choice": "MAKE A CHOICE:",
+  "menu_checker": "-(C)heck existing password against HIBP database",
+  "menu_generator": "-(G)enerate a new password",
+  "menu_language": "-(L)anguage selection",
+  "menu_exit": "- E(x)it",
+
+  "enter_password_check": "\nPlease enter the password you would like to check.",
+  "password_found": "Password was found in {count} leaks!",
+  "password_safe": "Password was not found to be in any known leaks.",
+
+  "enter_password_length": "Please enter the amount of symbols (8–16) you want for the new password.",
+  "password_length_prompt": "Password length: ",
+  "password_too_short": "Password is too short! Press RETURN to continue.",
+  "password_too_long": "Password is too long! Press RETURN to continue.",
+  "generating_password": "Generating password...\n",
+  "password_suggestion": "Secure password suggestion: ",
+
+  "language_menu": "SELECT A LANGUAGE:\n(en) - English\n(sv) - Svenska\n(fi) - Suomi\n(de) - Deutsch",
+
+  "press_return": "Press RETURN to continue.",
+  "press_return_menu": "Press RETURN to go back to the menu.",
+  "invalid_choice": "Invalid choice! Please press one of the keys asked.",
+  "invalid_input": "Invalid input! Press RETURN to continue."
+}

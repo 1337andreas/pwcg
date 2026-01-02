@@ -1,0 +1,26 @@
+{
+  "menu_title": "VÄLKOMMEN TILL",
+  "menu_choice": "VÄLJ ETT ALTERNATIV:",
+  "menu_checker": "- (K)ontrollera befintligt lösenord mot HIBP:s databas",
+  "menu_generator": "- (G)enerera ett nytt lösenord",
+  "menu_language": "- (S)pråkval",
+  "menu_exit": "- (X) Avsluta",
+
+  "enter_password_check": "\nAnge det lösenord du vill kontrollera.\n",
+  "password_found": "Lösenordet har upptäckts i {count} dataläckor!",
+  "password_safe": "Lösenordet har inte hittats i några kända läckor.",
+
+  "enter_password_length": "Ange hur många tecken (8–16) ditt nya lösenord skall innehålla.",
+  "password_length_prompt": "Lösenordets längd: ",
+  "password_too_short": "Lösenordet är för kort! Tryck på RETUR för att fortsätta.",
+  "password_too_long": "Lösenordet är för långt! Tryck på RETUR för att fortsätta.",
+  "generating_password": "Skapar lösenord...\n",
+  "password_suggestion": "Förslag på säkert lösenord: ",
+
+  "language_menu": "VÄLJ ETT SPRÅK:\n(en) - English\n(sv) - Svenska\n(fi) - Suomi\n(de) - Deutsch",
+
+  "press_return": "Tryck på RETUR för att fortsätta.",
+  "press_return_menu": "Tryck på RETUR för att gå tillbaka till menyn.",
+  "invalid_choice": "Ogiltigt val! Tryck på en av de angivna tangenterna.",
+  "invalid_input": "Felaktig inmatning! Tryck på RETUR för att fortsätta."
+}
