@@ -2,9 +2,8 @@
 #This script can both generate a secure password and check an existing one against a list of millions of known leaked passwords.
 #Furthermore, the user may upon generating a new password choose the amount of symbols needed. 
 #The script will automatically throw in upper- and lowercase letters from A to Z, as well as numbers and special symbols. The generated password also gets cross-checked for leaks to verify its safety.
-#Version 0.8b
+#Version 0.7b
 
-import getpass
 import secrets
 import string                                                                                                   #Imports the necessary modules containing random generation and all necessary characters.
 import urllib.request                                                                                           #This library is used for requesting data from HaveIBeenPwnd (HIBP). Importing the "requests" library would also work, but that one is external and would have to be installed then.
@@ -29,7 +28,8 @@ while True:
     userchoice=input()
     if userchoice == "C" or userchoice == "c":
         print("Please enter the password you would like to check.")
-        existing_password = getpass.getpass()                                                                           #Using "getpass" instead of "input" hides the password from shoulder-peeking. The password should only be in the RAM whilst the code runs. However, some terminals might save your input so putting sensitive information in here happens at your own risk.
+        existing_password = input()                                                                                     #The password input currently shows in plaintext, which should only be in the RAM whilst the code runs. However, some terminals might save your output so use this with caution. I aim to hide this with asterisks or something later.
+
                                                                                                                         #This function checks your existing password against the HIBP database.
         def check_password(password: str) -> int:                                                                                                  
             sha1 = hashlib.sha1(password.encode("utf-8")).hexdigest().upper()                                           #This hashes the password in SHA-1 in order to make the API accept it. The HIBP API does not accept passwords in plaintext, only hashes.
