@@ -8,8 +8,8 @@ Current features:
 -Password length choice
 -Key detection to prevent crashing
 -Existing password check using HIBP's API 
+-Changing the interface language (currently supports English, Swedish, German, French and Finnish.)
 
 Planned features:
 -Checking the newly generated password against HIBP automatically
--Selecting a language
 
