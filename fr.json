@@ -1,0 +1,26 @@
+{
+  "menu_title": "BIENVENUE DANS",
+  "menu_choice": "FAITES UN CHOIX:",
+  "menu_checker": "- (C) Vérifiér le mot de passe existant dans la base de donnéss HIBP",
+  "menu_generator": "- (G)énérer un nouveau mot de passe",
+  "menu_language": "- (S)élection de la langue",
+  "menu_exit": "- (X) Quitter",
+
+  "enter_password_check": "\nVeuillez entrer le mot de passe que vous voulez vérifier.",
+  "password_found": "Mot de passe a été trouvé dans {count} de fuites de données !",
+  "password_safe": "Mot de passe n´a pas été trouvé dans aucune fuite de données.",
+
+  "enter_password_length": "Veuillez rentrer le nombre de symboles (8-16) que vous choisissez pour votre nouveau mot de passe.",
+  "password_length_prompt": "Longeur du mot de passe: ",
+  "password_too_short": "Le mot de passe est trop court ! Veuillez presser la touche RETOUR pour continuer.",
+  "password_too_long": "Le mot de passe est trop long ! Veuillez presser la touche RETOUR pour continuer.",
+  "generating_password": "Le mot de passe est en cours de génération...\n",
+  "password_suggestion": "Suggestion d´un mot de passe sécurisé: ",
+
+  "language_menu": "SÉLECTIONNEZ UNE LANGUE:\n(en) - English\n(sv) - Svenska\n(fi) - Suomi\n(de) - Deutsch\n(fr) - Français",
+
+  "press_return": "Veuillez presser la touche RETOUR pour continuer.",
+  "press_return_menu": "Veuillez presser la touche RETOUR pour retourner au menu.",
+  "invalid_choice": "Choix invalide ! Veuillez presser une des touches demandés.",
+  "invalid_input": "Entrée invalide ! Veuillez presser la touche RETOUR pour continuer."
+}

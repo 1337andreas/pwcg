@@ -2,7 +2,7 @@
 #This script can both generate a secure password and check an existing one against a list of millions of known leaked passwords.
 #Furthermore, the user may upon generating a new password choose the amount of symbols needed. 
 #The script will automatically throw in upper- and lowercase letters from A to Z, as well as numbers and special symbols. The generated password also gets cross-checked for leaks to verify its safety.
-#Version 1.0
+#Version 1.1
 
 import json                                                                                                     #Required dependency for the localisation feature. More languages could easily be added.
 import getpass
@@ -13,6 +13,7 @@ import hashlib                                                                  
 
 
                                                                                                                 #Variable "userchoice" gets defined by the user's input and makes the script do different things. The while loop ensures the menu shows again after completing a chosen task.
+#---LOCALISATION---
 
 class Localisation:
     def __init__(self, language="en"):
@@ -25,6 +26,8 @@ class Localisation:
 
 translator = Localisation("en")                                                                                        #Chooses English automatically. Note that this script has dependencies, namely "lang_en.json", "lang_sv.json" and so on.
 t = translator.t
+
+#---MENU---
 
 while True:
     print(t("menu_title"))
@@ -76,7 +79,7 @@ while True:
 
         input(t("press_return"))                                                                                        #Takes the user back to the menu.
 
-
+#---PASSWORD GENERATOR---
                                                                                                                         #The "or" statements prevent returning "Invalid choice!" should the user write in lowercase.
     elif userchoice=="G" or userchoice=="g":
         try:                                                                                                            #Try/Except ensure this whole section gets skipped should newpassword_length not be an integer.         
@@ -118,20 +121,26 @@ while True:
         elif lang_choice == "de":
             translator = Localisation("de")
             t = translator.t
+        elif lang_choice == "fr":
+            translator = Localisation("fr")
+            t = translator.t
         else:
             input(t("invalid_input"))
 
         input(t("press_return_menu"))
 
     elif userchoice=="X" or userchoice=="x":
-        break                                                                                                          #This stops the program. User might have to close the console themselves.
+        exit()                                                                                                         #This stops the program. User might have to close the console themselves.
             
     else: print (t("invalid_choice"))                                                                                  #Prevents the program from crashing due to invalid input.
 
+            #Changelog 03-01-2026 (v1.1)
+            #Minor formatting changes for improved readability.
+            #Added French localisation.
+
             #Changelog 02-01-2026 (v1.0)
             #Issues with password length have been resolved. Now passwords generate as they should.
-            #Finnish language file added. Thank you Vilho / saabismi for writing the translation!  
-
+            #Finnish localisation added. Thank you Vilho / saabismi for writing the translation!  
             #Welcome sign in the menu now translates correctly, it was still hard-coded before.     
     
 

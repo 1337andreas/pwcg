@@ -1,9 +1,9 @@
 {
   "menu_title": "WELCOME TO",
   "menu_choice": "MAKE A CHOICE:",
-  "menu_checker": "-(C)heck existing password against HIBP database",
-  "menu_generator": "-(G)enerate a new password",
-  "menu_language": "-(L)anguage selection",
+  "menu_checker": "- (C)heck existing password against HIBP database",
+  "menu_generator": "- (G)enerate a new password",
+  "menu_language": "- (L)anguage selection",
   "menu_exit": "- E(x)it",
 
   "enter_password_check": "\nPlease enter the password you would like to check.",
@@ -17,7 +17,7 @@
   "generating_password": "Generating password...\n",
   "password_suggestion": "Secure password suggestion: ",
 
-  "language_menu": "SELECT A LANGUAGE:\n(en) - English\n(sv) - Svenska\n(fi) - Suomi\n(de) - Deutsch",
+  "language_menu": "SELECT A LANGUAGE:\n(en) - English\n(sv) - Svenska\n(fi) - Suomi\n(de) - Deutsch\n(fr) - Français",
 
   "press_return": "Press RETURN to continue.",
   "press_return_menu": "Press RETURN to go back to the menu.",
