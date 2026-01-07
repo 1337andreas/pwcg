@@ -8,6 +8,7 @@
 
   "enter_password_check": "\nSyötä salasana, jonka haluat tarkistaa.",
   "password_found": "Salasana löytyi {count} tietovuodosta!",
+  "password_found_db": "Salasana löytyi tietokannasta! Yritetään uudelleen..."
   "password_safe": "Salasanaa ei löytynyt yhdestäkään tunnetusta tietovuodosta.",
 
   "enter_password_length": "Syötä haluamasi merkkimäärä (8–16) uudelle salasanalle.",

@@ -8,6 +8,7 @@
 
   "enter_password_check": "\nVeuillez entrer le mot de passe que vous voulez vérifier.",
   "password_found": "Mot de passe a été trouvé dans {count} de fuites de données !",
+  "password_found_db": "Mot de passe a été trouvé dans la base de données, réessaie...",
   "password_safe": "Mot de passe n´a pas été trouvé dans aucune fuite de données.",
 
   "enter_password_length": "Veuillez rentrer le nombre de symboles (8-16) que vous choisissez pour votre nouveau mot de passe.",

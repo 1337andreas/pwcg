@@ -2,16 +2,18 @@
 #This script can both generate a secure password and check an existing one against a list of millions of known leaked passwords.
 #Furthermore, the user may upon generating a new password choose the amount of symbols needed. 
 #The script will automatically throw in upper- and lowercase letters from A to Z, as well as numbers and special symbols. The generated password also gets cross-checked for leaks to verify its safety.
-#Version 1.1
+#Version 1.2 | Last updated 07-01-2026 | Changelog at the end!
 
-import json                                                                                                     #Required dependency for the localisation feature. More languages could easily be added.
+import os
+import time
+import json                                                                                                     #Json is a required module for the localisation feature. More languages could easily be added.
 import getpass
 import secrets
 import string                                                                                                   #Imports the necessary modules containing random generation and all necessary characters.
 import urllib.request                                                                                           #This library is used for requesting data from HaveIBeenPwnd (HIBP). Importing the "requests" library would also work, but that one is external and would have to be installed then.
 import hashlib                                                                                                  #Importing this is necessary for checking passwords online, as the database API only takes hashes rather than cleartext. From a security standpoint, this is a good thing.
 
-
+os.chdir(os.path.dirname(os.path.abspath(__file__)))                                                            #Ensures the json files can be read in the same folder as the script, regardless of OS.
                                                                                                                 #Variable "userchoice" gets defined by the user's input and makes the script do different things. The while loop ensures the menu shows again after completing a chosen task.
 #---LOCALISATION---
 
@@ -24,13 +26,13 @@ class Localisation:
         text = self.texts.get(key, f"[{key}]")
         return text.format(**kwargs)
 
-translator = Localisation("en")                                                                                        #Chooses English automatically. Note that this script has dependencies, namely "lang_en.json", "lang_sv.json" and so on.
+translator = Localisation("en")                                                                                 #Chooses English automatically. Note that this script has dependencies, namely "lang_en.json", "lang_sv.json" and so on.
 t = translator.t
 
 #---MENU---
 
 while True:
-    print(t("menu_title"))
+    print(t("menu_title"))                                                                                        #Instead of having the user instructions directly in the script, it reads from the chosen language JSON file.
     print(f"""
        ____ _       _________________   ____  ____  ____ 
       / __ \ |     / / ____/ ____/__ \ / __ \/ __ \/ __ \ 
@@ -42,14 +44,10 @@ while True:
             {t("menu_checker")}
             {t("menu_generator")}
             {t("menu_language")}
-            {t("menu_exit")}""")                                                                                        #Instead of having the user instructions directly in the script, it reads from the chosen language JSON file.
+            {t("menu_exit")}""")
 
-    userchoice=input()
-    if userchoice == "C" or userchoice == "c" or userchoice == "K" or userchoice == "k" or userchoice == "T" or userchoice == "t":  #The multiple OR conditions in this IF statement are used for Swedish and German.
-        print(t("enter_password_check"))
-        existing_password = getpass.getpass()                                                                           #Using "getpass" instead of "input" hides the password from shoulder-peeking. The password should only be in the RAM whilst the code runs. However, some terminals might save your input so putting sensitive information in here happens at your own risk.
-                                                                                                                        #This function checks your existing password against the HIBP database.
-        def check_password(password: str) -> int:                                                                                                  
+    #---PASSWORD CHECKER---
+    def check_password(password: str) -> int:                                                                                                  
             sha1 = hashlib.sha1(password.encode("utf-8")).hexdigest().upper()                                           #This hashes the password in SHA-1 in order to make the API accept it. The HIBP API does not accept passwords in plaintext, only hashes.
             prefix = sha1[:5]                                                                                           #Splits the hash value into two variables: Prefix (for the HIPB API) and suffix (for cross-reference). Only the first 5 characters in the hash key are sent to the API. The exact password in itself does therefore not get checked, but rather each password with the same prefix. 
             suffix = sha1[5:]
@@ -69,6 +67,13 @@ while True:
                     return int(count)                                                                                   #No suffix match means the password is not in any known leaks. "return 0" is in case no match is found during the loop.
 
             return 0
+
+    userchoice=input()
+    if userchoice.lower() in ("c", "k", "t"):                                                                           #A simpler alternative to having loads of or conditions. Uppercase input gets converted to lowercase.
+        print(t("enter_password_check"))
+        time.sleep(0.2)
+        existing_password = getpass.getpass()                                                                           #Using "getpass" instead of "input" hides the password from shoulder-peeking. The password should only be in the RAM whilst the code runs. However, some terminals might save your input so putting sensitive information in here happens at your own risk.
+                                                                                                                        #This function checks your existing password against the HIBP database.
 
         count = check_password(existing_password)                                                                       #This calls the function and prints the check result.
 
@@ -97,16 +102,22 @@ while True:
                 newpassword_characters += string.ascii_letters                                                         #Letters A-Z and a-z
                 newpassword_characters += string.digits                                                                #Numbers 0-9
                 newpassword = []
-                for i in range(newpassword_length):                                                                    #This checks the amount of letters chosen by the user.
-                    randomchar = secrets.choice(newpassword_characters)                                                #This selects a random set of characters out of the ones defined above.
-                    newpassword.append(randomchar)
+                def passwordgen():                                                                                     #The new password generated by the program gets checked against HIBP automatically before being given to the user.
+                    newpassword = "".join(secrets.choice(newpassword_characters) for i in range(newpassword_length))   #If a match is found, a different random password gets generated and checked until no match is found.
+                    return newpassword                                                                                 #It is highly unlikely an 8-16 letter password generated by this script will be in a leak; for demonstrative purposes, the minimum number could be set to 2 or 3 above or certain character sets disabled.
+                newpassword = passwordgen()
+                while int((check_password(newpassword))) > 0:
+                    print(t("password_found_db"))
+                    newpassword = passwordgen()
                 print(t("password_suggestion"))                                                                        #A check of the new password will be performed here once that feature is implemented.
                 print("".join(newpassword)) 
                 input(t("press_return_menu"))
         except:
             input(t("invalid_input"))
+
+            #---LANGUAGE MENU---
             
-    elif userchoice=="L" or userchoice=="l" or userchoice == "S" or userchoice =="s":
+    elif userchoice.lower() in ("l", "s"):
         print(t("language_menu"))
         lang_choice = input()
         if lang_choice == "en":
@@ -127,12 +138,18 @@ while True:
         else:
             input(t("invalid_input"))
 
-        input(t("press_return_menu"))
-
     elif userchoice=="X" or userchoice=="x":
         exit()                                                                                                         #This stops the program. User might have to close the console themselves.
             
     else: print (t("invalid_choice"))                                                                                  #Prevents the program from crashing due to invalid input.
+
+            #Changelog 07-01-2026 (v1.2)
+            #Improved portability with import os; correct file path for the JSON files is ensured.
+            #Passwords generated by this program are now checked before being given to the user. 
+            #The function is the same as when a user checks their existing password; in the code it has been moved outside the menu loop.
+            #Added a small time delay to mitigate a getpass text display glitch in the password check logic. Displays correctly on all languages now.
+            #Code clean-up with removing multiple or conditions in a row for different languages. (line 51)
+            #Language menu now goes directly back to the main menu after making a choice, which prevents an invalid choice prompting user to press RETURN twice.
 
             #Changelog 03-01-2026 (v1.1)
             #Minor formatting changes for improved readability.

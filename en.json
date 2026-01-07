@@ -8,6 +8,7 @@
 
   "enter_password_check": "\nPlease enter the password you would like to check.",
   "password_found": "Password was found in {count} leaks!",
+  "password_found_db": "Password found in database, retrying.",
   "password_safe": "Password was not found to be in any known leaks.",
 
   "enter_password_length": "Please enter the amount of symbols (8–16) you want for the new password.",

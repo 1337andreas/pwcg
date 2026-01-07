@@ -8,6 +8,7 @@
 
   "enter_password_check": "\nAnge det lösenord du vill kontrollera.\n",
   "password_found": "Lösenordet har upptäckts i {count} dataläckor!",
+  "password_found_db": "Lösenordet har upptäckts i databasen, försöker med ett nytt...",
   "password_safe": "Lösenordet har inte hittats i några kända läckor.",
 
   "enter_password_length": "Ange hur många tecken (8–16) ditt nya lösenord skall innehålla.",

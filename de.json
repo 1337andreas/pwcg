@@ -8,6 +8,7 @@
 
   "enter_password_check": "\nBitte geben Sie ein Passwort ein, das Sie kontrollieren wollen.\n",
   "password_found": "Passwort wurde bei der Überprüfung in {count} Datenlecks gefunden!",
+  "password_found_db": "Passwort wurde im Databank gefunden, versucht wieder...",
   "password_safe": "Passwort wurde bei der Überprüfung in keine gekennte Datenlecks gefunden.",
 
   "enter_password_length": "Bitte wählen Sie wie lang (8–16 Zeichen) Ihr neues Passwort sein soll.",
