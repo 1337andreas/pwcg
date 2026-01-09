@@ -2,15 +2,17 @@
 #This script can both generate a secure password and check an existing one against a list of millions of known leaked passwords.
 #Furthermore, the user may upon generating a new password choose the amount of symbols needed. 
 #The script will automatically throw in upper- and lowercase letters from A to Z, as well as numbers and special symbols. The generated password also gets cross-checked for leaks to verify its safety.
-#Version 1.2 | Last updated 07-01-2026 | Changelog at the end!
+#Version 1.3 | Last updated 09-01-2026 | Changelog at the end!
 
+import platform                                                                                                 #As this script depends on having an Internet connection, a check using "platform" is performed in order to ping Google's DNS. The commands on Windows and Linux are different for this.
 import os
+import subprocess                                                                                               #Subprocess is used to check your Internet connection, which is of course necessary to reach the API.
 import time
 import json                                                                                                     #Json is a required module for the localisation feature. More languages could easily be added.
 import getpass
 import secrets
-import string                                                                                                   #Imports the necessary modules containing random generation and all necessary characters.
-import urllib.request                                                                                           #This library is used for requesting data from HaveIBeenPwnd (HIBP). Importing the "requests" library would also work, but that one is external and would have to be installed then.
+import string                                                                                                   #Secrets is used for random and string for all necessary characters.
+import urllib.request                                                                                           #This library is used for requesting data from HaveIBeenPwnd (HIBP). 
 import hashlib                                                                                                  #Importing this is necessary for checking passwords online, as the database API only takes hashes rather than cleartext. From a security standpoint, this is a good thing.
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))                                                            #Ensures the json files can be read in the same folder as the script, regardless of OS.
@@ -29,6 +31,27 @@ class Localisation:
 translator = Localisation("en")                                                                                 #Chooses English automatically. Note that this script has dependencies, namely "lang_en.json", "lang_sv.json" and so on.
 t = translator.t
 
+    #---OS CHECK AND INTERNET CONNECTIVITY TEST---
+
+def connectiontest(ip_address):
+    print("Detecting system and trying Internet connection...")
+    system = platform.system()
+    try:
+        if system == "Linux":
+            output = subprocess.check_output(["ping", "-c", "1", ip_address])                                    #An OS check is performed here, because the ping commands for Windows and Linux are different.
+            print("Linux detected.")
+        elif system == "Windows":
+            print("Windows detected.")
+            output = subprocess.check_output(["ping", "-n", "1", ip_address])
+        print(output.decode())
+        input("Internet connection established. Press RETURN to continue.")
+    except subprocess.CalledProcessError:
+        print(f"Could not reach {ip_address}. Terminating PWCG2000...")
+        exit()
+
+connectiontest("8.8.8.8")                                                                                         #Pinging Google DNS to ensure the user has an Internet connection.
+
+
 #---MENU---
 
 while True:
@@ -46,6 +69,7 @@ while True:
             {t("menu_language")}
             {t("menu_exit")}""")
 
+
     #---PASSWORD CHECKER---
     def check_password(password: str) -> int:                                                                                                  
             sha1 = hashlib.sha1(password.encode("utf-8")).hexdigest().upper()                                           #This hashes the password in SHA-1 in order to make the API accept it. The HIBP API does not accept passwords in plaintext, only hashes.
@@ -60,7 +84,7 @@ while True:
 
             with urllib.request.urlopen(req, timeout=10) as response:                                                   #Then this reads the data returned by the API, using the "urllib.request" library imported by the script.
                 data = response.read().decode("utf-8")                                                                  #API responds with a line of text that gets converted back.
-
+                
             for line in data.splitlines():                                                                      
                 hash_suffix, count = line.split(":")                                                                    #This splits the text into different suffixes which are checked.
                 if hash_suffix == suffix:                                                                               #If there is a suffix match, it means the password is in a leak known by HIBP.
@@ -106,6 +130,7 @@ while True:
                     newpassword = "".join(secrets.choice(newpassword_characters) for i in range(newpassword_length))   #If a match is found, a different random password gets generated and checked until no match is found.
                     return newpassword                                                                                 #It is highly unlikely an 8-16 letter password generated by this script will be in a leak; for demonstrative purposes, the minimum number could be set to 2 or 3 above or certain character sets disabled.
                 newpassword = passwordgen()
+
                 while int((check_password(newpassword))) > 0:
                     print(t("password_found_db"))
                     newpassword = passwordgen()
