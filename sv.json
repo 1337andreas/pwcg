@@ -1,4 +1,11 @@
 {
+  "system_detect": "Verifierar operativsystem och Internetanslutning... ",
+  "system_linux": "Linux upptäckt.",
+  "system_windows": "Windows upptäckt.",
+  "system_unknown": "Okänt operativsystem upptäckt. PWCG kan enbart verifiera Internetanslutning i Windows och Linux för tillfället.",
+  "icmp_success": "Internetanslutning säkerställd. Tryck på RETUR för att fortsätta.",
+  "icmp_fail": "Kunde inte nå {ip_address}. Avslutar PWCG2000... ",
+  
   "menu_title": "VÄLKOMMEN TILL",
   "menu_choice": "VÄLJ ETT ALTERNATIV:",
   "menu_checker": "- (K)ontrollera befintligt lösenord mot HIBP:s databas",
@@ -24,4 +31,4 @@
   "press_return_menu": "Tryck på RETUR för att gå tillbaka till menyn.",
   "invalid_choice": "Ogiltigt val! Tryck på en av de angivna tangenterna.",
   "invalid_input": "Felaktig inmatning! Tryck på RETUR för att fortsätta."
-}
+}
