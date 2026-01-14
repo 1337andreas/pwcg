@@ -1,4 +1,11 @@
 {
+  "system_detect": "Käyttöjärjestelmää tunnistetaan ja yritetään muodostaa internetyhteyttä... ",
+  "system_linux": "Linux havaittu.",
+  "system_windows": "Windows havaittu.",
+  "system_unknown": "Tuntematon käyttöjärjestelmä havaittu. PWCG ei voi tällä hetkellä varmistaa internetyhteyttä muille järjestelmille kuin Windowsille tai Linuxille.",
+  "icmp_success": "Internetyhteys muodostettu. Jatka painamalla ENTER.",
+  "icmp_fail": "Ei saatu yhteytää osoitteeseen {ip_address}. Lopetetaan PWCG2000... ",
+  
   "menu_title": "TERVETULOA: ",
   "menu_choice": "VALITSE ",
   "menu_checker": "- (T)arkista nykyinen salasana HIBP-tietokantaa vasten",
@@ -8,7 +15,7 @@
 
   "enter_password_check": "\nSyötä salasana, jonka haluat tarkistaa.",
   "password_found": "Salasana löytyi {count} tietovuodosta!",
-  "password_found_db": "Salasana löytyi tietokannasta! Yritetään uudelleen..."
+  "password_found_db": "Salasana löytyi tietokannasta! Yritetään uudelleen...",
   "password_safe": "Salasanaa ei löytynyt yhdestäkään tunnetusta tietovuodosta.",
 
   "enter_password_length": "Syötä haluamasi merkkimäärä (8–16) uudelle salasanalle.",
@@ -24,4 +31,4 @@
   "press_return_menu": "Paina ENTER palataksesi valikkoon.",
   "invalid_choice": "Virheellinen valinta! Paina yhtä pyydetyistä näppäimistä.",
   "invalid_input": "Virheellinen syöttö! Paina ENTER jatkaaksesi."
-}
+}
