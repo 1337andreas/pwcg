@@ -1,4 +1,11 @@
 {
+  "system_detect": "Erkennt Betriebssystem und überprüft Internetverbindung... ",
+  "system_linux": "Linux erkennt.",
+  "system_windows": "Windows erkennt.",
+  "system_unknown": "Unbekanntes OS erkennt. PWCG kann derzeit die Internetverbindung anderen Systeme als Windows oder Linux nicht überprüfen.",
+  "icmp_success": "Internetverbindung hergestellt. Drücken Sie EINGABE um fortzusetzen.",
+  "icmp_fail": "Die IP-Adresse {ip_address} konnte nicht erreicht werden. PWCG2000 wird beendet... ",
+  
   "menu_title": "WILLKOMMEN BEI",
   "menu_choice": "BITTE WÄHLEN SIE:",
   "menu_checker": "- (K)ontrolle des derzeitigen Passworts im HIBP-Databank",
@@ -24,4 +31,4 @@
   "press_return_menu": "Drücken Sie EINGABE um wieder ins Menü zu kommen.",
   "invalid_choice": "Ungültiges Wahl! Drücken Sie einer die angefragten Taste.",
   "invalid_input": "Ungültiges Eingabe! Drücken Sie EINGABE um fortzusetzen."
-}
+}

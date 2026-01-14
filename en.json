@@ -1,4 +1,11 @@
 {
+  "system_detect": "Detecting OS and trying Internet connection... ",
+  "system_linux": "Linux detected.",
+  "system_windows": "Windows detected.",
+  "system_unknown": "Unknown OS detected. PWCG cannot verify Internet connectivity for systems other than Windows or Linux at this time.",
+  "icmp_success": "Internet connection established. Press RETURN to continue.",
+  "icmp_fail": "Could not reach {ip_address}. Terminating PWCG2000... ",
+  
   "menu_title": "WELCOME TO",
   "menu_choice": "MAKE A CHOICE:",
   "menu_checker": "- (C)heck existing password against HIBP database",
@@ -24,4 +31,4 @@
   "press_return_menu": "Press RETURN to go back to the menu.",
   "invalid_choice": "Invalid choice! Please press one of the keys asked.",
   "invalid_input": "Invalid input! Press RETURN to continue."
-}
+}

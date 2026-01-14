@@ -2,20 +2,31 @@
 #This script can both generate a secure password and check an existing one against a list of millions of known leaked passwords.
 #Furthermore, the user may upon generating a new password choose the amount of symbols needed. 
 #The script will automatically throw in upper- and lowercase letters from A to Z, as well as numbers and special symbols. The generated password also gets cross-checked for leaks to verify its safety.
-#Version 1.2 | Last updated 07-01-2026 | Changelog at the end!
+#Version 1.5 | Last updated 14-01-2026 | Changelog at the end!
 
+import argparse
+import platform                                                                                                 #As this script depends on having an Internet connection, a check using "platform" is performed in order to ping Google's DNS. The commands on Windows and Linux are different for this.
 import os
+import subprocess                                                                                               #Subprocess is used to check your Internet connection, which is of course necessary to reach the API.
 import time
 import json                                                                                                     #Json is a required module for the localisation feature. More languages could easily be added.
 import getpass
 import secrets
-import string                                                                                                   #Imports the necessary modules containing random generation and all necessary characters.
-import urllib.request                                                                                           #This library is used for requesting data from HaveIBeenPwnd (HIBP). Importing the "requests" library would also work, but that one is external and would have to be installed then.
+import string                                                                                                   #Secrets is used for random and string for all necessary characters.
+import urllib.request                                                                                           #This library is used for requesting data from HaveIBeenPwnd (HIBP). 
 import hashlib                                                                                                  #Importing this is necessary for checking passwords online, as the database API only takes hashes rather than cleartext. From a security standpoint, this is a good thing.
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))                                                            #Ensures the json files can be read in the same folder as the script, regardless of OS.
-                                                                                                                #Variable "userchoice" gets defined by the user's input and makes the script do different things. The while loop ensures the menu shows again after completing a chosen task.
-#---LOCALISATION---
+
+#--- FLAGS ---                                                                                                #Allows you to choose a language from the terminal when running PWCG2000. This can later be changed in the program's menu. Also shows the current version of PWCG2000.
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("--lang", choices=["en", "sv", "fi", "de", "fr"], default="en", help="Choose a language. If none is chosen, PWCG2000 defaults to English.")
+parser.add_argument("--version", action="version", version="PWCG2000 v1.5", help="Shows PWCG2000 version.")
+args = parser.parse_args()
+
+#--- LOCALISATION ---
 
 class Localisation:
     def __init__(self, language="en"):
@@ -26,10 +37,34 @@ class Localisation:
         text = self.texts.get(key, f"[{key}]")
         return text.format(**kwargs)
 
-translator = Localisation("en")                                                                                 #Chooses English automatically. Note that this script has dependencies, namely "lang_en.json", "lang_sv.json" and so on.
+translator = Localisation(args.lang)                                                                                 #Chooses English automatically. Note that this script has dependencies, namely "lang_en.json", "lang_sv.json" and so on.
 t = translator.t
 
-#---MENU---
+    #--- OS CHECK AND INTERNET CONNECTIVITY TEST ---
+
+def connectiontest(ip_address):
+    print(t("system_detect"))
+    system = platform.system()
+    try:
+        if system == "Linux":
+            print(t("system_linux"))
+            output = subprocess.check_output(["ping", "-c", "1", ip_address])                                    #An OS check is performed here, because the ping commands for Windows and Linux are different.
+        elif system == "Windows":
+            print(t("system_windows"))
+            output = subprocess.check_output(["ping", "-n", "1", ip_address])
+        else:
+            print(t("system_unknown"))
+            exit()
+        print(output.decode())
+        input(t("icmp_success"))
+    except subprocess.CalledProcessError:
+        print(t("icmp_fail"))
+        exit()
+
+connectiontest("8.8.8.8")                                                                                         #Pinging Google DNS to ensure the user has an Internet connection.
+
+
+#--- MENU ---
 
 while True:
     print(t("menu_title"))                                                                                        #Instead of having the user instructions directly in the script, it reads from the chosen language JSON file.
@@ -46,7 +81,8 @@ while True:
             {t("menu_language")}
             {t("menu_exit")}""")
 
-    #---PASSWORD CHECKER---
+
+    #--- PASSWORD CHECKER ---
     def check_password(password: str) -> int:                                                                                                  
             sha1 = hashlib.sha1(password.encode("utf-8")).hexdigest().upper()                                           #This hashes the password in SHA-1 in order to make the API accept it. The HIBP API does not accept passwords in plaintext, only hashes.
             prefix = sha1[:5]                                                                                           #Splits the hash value into two variables: Prefix (for the HIPB API) and suffix (for cross-reference). Only the first 5 characters in the hash key are sent to the API. The exact password in itself does therefore not get checked, but rather each password with the same prefix. 
@@ -60,7 +96,7 @@ while True:
 
             with urllib.request.urlopen(req, timeout=10) as response:                                                   #Then this reads the data returned by the API, using the "urllib.request" library imported by the script.
                 data = response.read().decode("utf-8")                                                                  #API responds with a line of text that gets converted back.
-
+                
             for line in data.splitlines():                                                                      
                 hash_suffix, count = line.split(":")                                                                    #This splits the text into different suffixes which are checked.
                 if hash_suffix == suffix:                                                                               #If there is a suffix match, it means the password is in a leak known by HIBP.
@@ -84,7 +120,7 @@ while True:
 
         input(t("press_return"))                                                                                        #Takes the user back to the menu.
 
-#---PASSWORD GENERATOR---
+#--- PASSWORD GENERATOR ---
                                                                                                                         #The "or" statements prevent returning "Invalid choice!" should the user write in lowercase.
     elif userchoice=="G" or userchoice=="g":
         try:                                                                                                            #Try/Except ensure this whole section gets skipped should newpassword_length not be an integer.         
@@ -106,6 +142,7 @@ while True:
                     newpassword = "".join(secrets.choice(newpassword_characters) for i in range(newpassword_length))   #If a match is found, a different random password gets generated and checked until no match is found.
                     return newpassword                                                                                 #It is highly unlikely an 8-16 letter password generated by this script will be in a leak; for demonstrative purposes, the minimum number could be set to 2 or 3 above or certain character sets disabled.
                 newpassword = passwordgen()
+
                 while int((check_password(newpassword))) > 0:
                     print(t("password_found_db"))
                     newpassword = passwordgen()
@@ -115,7 +152,7 @@ while True:
         except:
             input(t("invalid_input"))
 
-            #---LANGUAGE MENU---
+            #--- LANGUAGE MENU ---
             
     elif userchoice.lower() in ("l", "s"):
         print(t("language_menu"))
@@ -143,6 +180,19 @@ while True:
             
     else: print (t("invalid_choice"))                                                                                  #Prevents the program from crashing due to invalid input.
 
+            #Changelog 14-01-2026 (v1.5)
+            #Added arguments/flags. 
+            #Language can now be chosen in the terminal with for example the flag --lang sv . This means the initial ICMP test gets translated. Languages can still be changed in the menu.
+            #
+            # --help flag explaining all the other flags. 
+
+            #Changelog 12-01-2026 (v1.4)
+            #Closing PWCG2000 in a controlled manner in case a user runs it on an unsupported OS.
+            #Added JSON tags for the startup ICMP test and updated the language files in order to support running PWCG2000 with arguments in a future update.
+            
+            #Changelog 09-01-2026 (v1.3)
+            #OS check and internet connectivity test. Uses "platform" to detect whether Windows or Linux is running and pings Google using "urllib" to verify Internect connection.
+            
             #Changelog 07-01-2026 (v1.2)
             #Improved portability with import os; correct file path for the JSON files is ensured.
             #Passwords generated by this program are now checked before being given to the user. 

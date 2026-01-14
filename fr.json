@@ -1,4 +1,11 @@
 {
+"system_detect": "Détection du système d'exploitation et tentative de connexion Internet... ",
+  "system_linux": "Linux détecté.",
+  "system_windows": "Windows détecté.",
+  "system_unknown": "Système d'exploitation inconnu détecté. PWCG ne peut pas vérifier la connectivité Internet pour les systèmes autres que Windows ou Linux pour le moment.",
+  "icmp_success": "Connexion Internet établie. Veuillez presser la touche RETOUR pour continuer.",
+  "icmp_fail": "Impossible de joindre {ip_address}. Arrêt de PWCG2000... ",
+
   "menu_title": "BIENVENUE DANS",
   "menu_choice": "FAITES UN CHOIX:",
   "menu_checker": "- (C) Vérifiér le mot de passe existant dans la base de donnéss HIBP",
