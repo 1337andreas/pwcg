@@ -4,7 +4,7 @@
 #This script can both generate a secure password and check an existing one against a list of millions of known leaked passwords.
 #Furthermore, the user may upon generating a new password choose the amount of symbols needed. 
 #The script will automatically throw in upper- and lowercase letters from A to Z, as well as numbers and special symbols. The generated password also gets cross-checked for leaks to verify its safety.
-#Version 1.6 | Last updated 14-01-2026
+#Version 1.7 | Last updated 14-01-2026
 
 import logging                                                                                                  #For writing to a log file.
 import argparse
@@ -24,12 +24,13 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))                            
 #--- LOGGING ---
 log = "PWCG2000_output.txt"
 
-logging.basicConfig(
-level=logging.INFO,
-format="%(asctime)s [%(levelname)s] %(message)s",
-handlers=[logging.FileHandler(log,encoding="utf-8"), logging.StreamHandler()]
-)
+file_handler = logging.FileHandler(log, encoding="utf-8")
+file_handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s"))                         #Separates writing to the log file from writing to the terminal.
 
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(logging.Formatter("%(message)s"))
+
+logging.basicConfig(level=logging.INFO, handlers=[file_handler, console_handler])
 logging.info("Initialised PWCG2000.")
 
 #--- FLAGS ---                                                                                                #Allows you to choose a language from the terminal when running PWCG2000. This can later be changed in the program's menu. Also shows the current version of PWCG2000.
@@ -81,7 +82,6 @@ connectiontest("8.8.8.8")                                                       
 #--- MENU ---
 
 while True:
-    logging.info("Showed menu")
     print(t("menu_title"))                                                                                        #Instead of having the user instructions directly in the script, it reads from the chosen language JSON file.
     print(f"""
        ____ _       _________________   ____  ____  ____ 
