@@ -5,6 +5,7 @@
 #Furthermore, the user may upon generating a new password choose the amount of symbols needed. 
 #The script will automatically throw in upper- and lowercase letters from A to Z, as well as numbers and special symbols. The generated password also gets cross-checked for leaks to verify its safety.
 #Version 1.7 | Last updated 14-01-2026
+#Code Reviewed by IsacL on 14-01-2026, Good job
 
 import logging                                                                                                  #For writing to a log file.
 import argparse
