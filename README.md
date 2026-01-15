@@ -55,7 +55,7 @@ How to use:**
 -If you're checking your existing password, the script tells you how many times it has been leaked (or ideally, if it hasn't been leaked.)
 
 
--PWCG2000 also writes to a log file. Your existing password is never saved anywhere though.
+-PWCG2000 also writes to a log file. Your existing password is never saved anywhere though. File can be found in the same folder as the script and attached JSON files.
 
 **
 System requirements:**
